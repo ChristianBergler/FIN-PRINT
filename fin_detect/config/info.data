@@ -1,0 +1,8 @@
+classes=2
+train=/home/christian/Desktop/data_split_HAAD/train.txt
+valid=/home/christian/Desktop/data_split_HAAD/valid.txt
+test=/home/christian/Desktop/data_split_HAAD/test.txt
+names=/home/christian/Desktop/GITHUB/FIN-PRINT/fin_detect/config/class.names
+backup=weights
+
+
