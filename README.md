@@ -67,13 +67,15 @@ Due to the fact that the underscore (_) symbol was chosen as a delimiter between
 ## Required Directory Structure for Training
 FIN-DETECT is capable of performing its own training, validation, and test split if there is not an existing one. Based on a given image folder (--image_folder option, needs to contain all image files, together with the bounding box ground truth annotation files) a new data partitioning will be conducted. Otherwise an existing data split has to exist. Within the config/info.data file the respective data split has to be defined. In case of the machine-based data partitioning everything will be done automatically. In case of an existing data split the train.txt, valid.txt, and test.txt path has to be adjusted/updated within the config/info.data file.
 
-<ins>Example of train.txt, valid.txt, and test.txt structure:</ins>
+<ins>**Example of train.txt, valid.txt, and test.txt structure:**</ins>
 
+```
 *ImagePath/ImageFile1.JPG\
 ImagePath/ImageFile2.JPG\
 ImagePath/ImageFile3.JPG\
 ImagePath/ImageFile4.JPG\
 (...)*
+```
 
 All bounding box files have to have the same filename as the original image, just a different filename ending (.txt). Moreover, the machine generated data split (only active if the --image_folder is set) offers an option that the validation and test partition does not contain images from the same phototgrapher and date. Bounding box ground truth files can be generated using the YOLO-MARK toolkit which is publicly available here: 
 
@@ -111,7 +113,7 @@ During training FIN-DETECT will be verified on an independent validation set. In
 
 There exist also the possibility to evaluate the FIN-DETECT model on an entire unseen portion of images. The prediction script (*predict.py*) implements a data loading procedure of a given image set, and applies the trained model (either loading the model from a given checkpoint.pth or the final .pk model file) in order to detect the bounding boxes for each image. All bounding box information will be stored within file-specific .txt bounding box files. Moreover, downsized (re-scaled versions of the original image) images, together with the detected and marked bounding boxes, will be additionally stored for reasons of visual inspection. 
 
-<ins>Example Command:</ins>
+<ins>**Example Command:**</ins>
 
 ```predict.py --debug --image_folder image_folder --model_cfg path_to_folder/yolov3-custom.cfg --model_path path_to_folder/detector.pk --class_path path_to_folder/class.names --conf_thres 0.8 --nms_thres 0.5 --batch_size 1 --n_cpu 1 --img_size 416 --output_dir output_dir --log_dir log_dir```
 
@@ -149,13 +151,13 @@ Example Command:
 
 FIN-EXTRACT generates two output files - sub-image and bounding box file per detected bounding box - following the respective template:
 
-<ins>Filename Sub-Image-Template</ins>: 
+<ins>**Filename Sub-Image-Template**</ins>: 
 
 "SPECIES"\_"YYYY-MM-DD"\_"PHOTOGRAPHER"\_"LOCATION"\_"ID"\_"CLASS"\_cropped\_"EXTRACTION-INDEX"\_"YYYY-MM-DD"\_"HH-MM-SS".(jpg, JPG, png)
 
 e.g. *KWT_2017-02-21_MMalleson_ConstanceBank_065_Fin_cropped_0_2017-02-21_12-15-55.JPG*
 
-<ins>Filename Sub-Image Bounding Box Template:</ins>
+<ins>**Filename Sub-Image Bounding Box Template:**</ins>
 
 "SPECIES"\_"YYYY-MM-DD"\_"PHOTOGRAPHER"\_"LOCATION"\_"ID"\_"CLASS"\_cropped\_"EXTRACTION-INDEX"\_"YYYY-MM-DD"\_"HH-MM-SS".txt
 
@@ -173,17 +175,21 @@ VVI-DETECT is a deep learning algorithm which has been implemented in Python (Ve
 ## Required Filename Structure for Training
 In order to properly load and preprocess your own animal-specific data to train a network in order to distinguish between *Valid Versus Invalid (VVI)* previously detected and equally resized/rescaled target animal-specific sub-images of interest, the filename structure has to follow the original image-specific output structure of FIN-EXTRACT (see above). An image, e.g. *KWT_2017-02-21_MMalleson_ConstanceBank_065.JPG*, together with the corresponding predicted bounding box result (*KWT_2017-02-21_MMalleson_ConstanceBank_065.txt*, e.g. 3 predicted bounding boxes), provided by FIN-DETECT, lead to the following sub-images, created by FIN-EXTRACT:
 
-<ins>Sub-Images:</ins>
+<ins>**Sub-Images:**</ins>
 
+```
 *KWT_2017-02-21_MMalleson_ConstanceBank_065_Fin_cropped_0_2017-02-21_12-15-55.JPG*\
 *KWT_2017-02-21_MMalleson_ConstanceBank_065_Fin_cropped_1_2017-02-21_12-15-55.JPG*\
 *KWT_2017-02-21_MMalleson_ConstanceBank_065_Fin_cropped_2_2017-02-21_12-15-55.JPG*
- 
-<ins>Sub-Image Bounding Boxes:</ins>
+```
 
+<ins>**Sub-Image Bounding Boxes:**</ins>
+
+```
 *KWT_2017-02-21_MMalleson_ConstanceBank_065_Fin_cropped_0_2017-02-21_12-15-55.txt*\
 *KWT_2017-02-21_MMalleson_ConstanceBank_065_Fin_cropped_1_2017-02-21_12-15-55.txt*\
 *KWT_2017-02-21_MMalleson_ConstanceBank_065_Fin_cropped_2_2017-02-21_12-15-55.txt*
+```
 
 In order to train VVI-DETECT the bounding box (.txt) files are not needed. However, the filename structure of the sub-images has to follow the above shown template (same as the output of FIN-EXTRACT), to ensure a correct training procedure.
 
@@ -207,7 +213,7 @@ Data_Folder (e.g. containing all the sub-folders with the images)
  	    ├──  KWT_2014-10-26_JTowers_BlackfishSound_8678_Fin_cropped_1_2014-10-26_17-23-12.JPG
  	    ├──  (...)
 
-<ins>Example of train.csv, valid.csv, and test.csv structure:</ins>
+<ins>**Example of train.csv, valid.csv, and test.csv structure:**</ins>
 
 ```
 Label,Filepath\
@@ -238,7 +244,7 @@ During training VVI-DETECT will be verified on an independent validation set. In
 
 There exist also the possibility to evaluate the VVI-DETECT model on an entire unseen portion of images. The prediction script (*predict.py*) implements a data loading procedure of a given image set, and applies the trained model (loading the model from as .pk file) in order to distinguish between valid and invalid sub-images for subsequent animal-specific individual classification/recognition. Each image will be classified, presenting the predicted class, label, and a posteriori probability, next to an optional given threshold (passed or not passed).
 
-<ins>Example Command:</ins>
+<ins>**Example Command:**</ins>
 
 ```predict.py --debug --model_path path_to_folder/model.pk --output_path output_directory --labels_info_file path_to_folder/label_dictionary_X_intervalX.json --log_dir log_dir --image_input_folder image_directory --batch_size 1 --img_size 512 --threshold 0.90 ```
 
@@ -280,7 +286,7 @@ Data_Folder (e.g. containing all the sub-folders with the images)
  	|   ├──  KWT_2014-10-26_JTowers_BlackfishSound_8678_Fin_cropped_1_2014-10-26_17-23-12.JPG
  	|   ├──  (...)
 
-<ins>Example of train.csv, valid.csv, and test.csv structure:</ins>
+<ins>**Example of train.csv, valid.csv, and test.csv structure:**</ins>
 
 ```
 Label,Filepath\
@@ -314,6 +320,6 @@ During training FIN-IDENTIFY will be verified on an independent validation set. 
 
 There exist also the possibility to evaluate the FIN-IDENTIFY model on an entire unseen portion of images. The prediction script (predict.py) implements a data loading procedure of a given image set, and applies the trained model (loading the model from as .pk file) in order to distinguish between the individual-specific animals of the respective target species. Each image will be classified, presenting the predicted class, label, and a posteriori probability, next to an optional given threshold (passed or not passed). Moreover, the a posteriori probabilities, next to the label information, of the top-K ranked candidates (see option *--topK*) is listed.  
 
-<ins>Example Command:</ins>
+<ins>**Example Command:**</ins>
 
 ```predict.py --debug --model_path path_to_folder/model.pk --output_path output_directory --labels_info_file path_to_folder/label_dictionary_X_intervalX.json --log_dir log_dir --image_input_folder image_directory --topK 3 --batch_size 1 --img_size 512 --threshold 0.90 ```
