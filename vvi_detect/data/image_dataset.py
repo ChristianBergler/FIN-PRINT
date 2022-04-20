@@ -322,7 +322,7 @@ def csv_datasets_exist(ds_dir):
 Generates label dictionary based on the generated folders within the input image folder
 """
 def get_label_dict(dirpath):
-	labels = os.listdir(dirpath)
+	labels = sorted(os.listdir(dirpath))
 	labels_dict = {k: v for v, k in enumerate(labels)}
 
 	return labels_dict
