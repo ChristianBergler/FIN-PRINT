@@ -242,7 +242,7 @@ During training VVI-DETECT will be verified on an independent validation set. In
 
 ```tensorboard --logdir summary_directory/```
 
-There exist also the possibility to evaluate the VVI-DETECT model on an entire unseen portion of images. The prediction script (*predict.py*) implements a data loading procedure of a given image set, and applies the trained model (loading the model from as .pk file) in order to distinguish between valid and invalid sub-images for subsequent animal-specific individual classification/recognition. Each image will be classified, presenting the predicted class, label, and a posteriori probability, next to an optional given threshold (passed or not passed).
+There exist also the possibility to evaluate the VVI-DETECT model on an entire unseen portion of images. The prediction script (*predict.py*) implements a data loading procedure of a given image set, and applies the trained model (loading the model from as .pk file) in order to distinguish between valid and invalid sub-images for subsequent animal-specific individual classification/recognition. Each image will be classified, presenting the predicted class, label, and a posteriori probability, next to an optional given threshold (passed or not passed). The *label_dictionary_X_intervalX.json* file is automatically generated after model training, and includes each class plus its corresponding class index (alphanumeric ordering). The order of the class indices during training have to be maintained also during prediction in order to ensure valid network outputs.
 
 <ins>**Example Command:**</ins>
 
