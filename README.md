@@ -29,7 +29,7 @@ GNU GENERAL PUBLIC LICENSE, Version 3, 29 June 2007 (GNU GPLv3)
 # FIN-DETECT
 
 ## Python, Python Libraries, and Version
-FIN-DETECT is a deep learning algorithm which has been implemented in Python (Version=3.8) (Operating System: Linux) together with the deep learning framework PyTorch (Version=1.8.1, TorchVision=0.9.1). Moreover it requires the following Python libraries: Pillow, Terminaltables, TensorboardX, Matplotlib, Tqdm, next to a portion of Python libraries already integrated within the standard Python repository (recent versions).
+FIN-DETECT is a deep learning algorithm which has been implemented in Python (Version=3.8) (Operating System: Linux) together with the deep learning framework PyTorch (Version=1.8.1, TorchVision=0.9.1). Moreover it requires the following Python libraries: Pillow, Terminaltables, TensorboardX, Matplotlib, Tqdm, next to a portion of Python libraries already integrated within the standard Python repository (recent versions). FIN-PRINT is currently compatible with Python 3.8 and PyTorch (Version=1.11.0+cu113/cpu, TorchVision=0.12.0+cu113/cpu, TorchAudio=0.11.0+cu113/cpu).
 
 ## Required Filename Structure for Training
 In order to properly load and preprocess your own animal-specific data to train the network you need to prepare the filenames of your image data, next to the bounding box files for each image, in order to fit the following template/format:

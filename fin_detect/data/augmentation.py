@@ -3,7 +3,7 @@ Module: augmentation.py
 Authors: Christian Bergler, Alexander Gebhard
 License: GNU General Public License v3.0
 Institution: Friedrich-Alexander-University Erlangen-Nuremberg, Department of Computer Science, Pattern Recognition Lab
-Last Access: 25.01.2022
+Last Access: 26.04.2022
 """
 
 import torch
